@@ -1,1 +1,14 @@
+WITH sample_orders AS (
+SELECT * FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF100.ORDERS
+WHERE year(o_orderdate) = 1994
+)
+
+SELECT
+    DATE_TRUNC('year', o_orderdate) AS o_year,
+    DATE_TRUNC('month', o_orderdate) AS o_month,
+    SUM(o_totalprice) AS total_revenue,
+    COUNT(o_orderkey) AS number_of_orders
+FROM sample_orders
+GROUP BY 1,2
+
 # Hier eure Namen eintragen :) 
